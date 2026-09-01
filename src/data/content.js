@@ -18,19 +18,58 @@ export const featuredProject = {
   name: "MonOSS",
   fullName: "Monist Organization and Simulation System",
   summary:
-    "A personal knowledge graph and simulation engine, built from scratch in Python, on the premise that every piece of information — a person, a task, a meeting, an idea — can be represented as one flexible object type connected by typed relationships.",
+    "A personal knowledge graph engine, built from scratch in Python, on the premise that every piece of information — a person, a task, a meeting, an idea — can be represented as one flexible object type connected by typed relationships. It has since grown from a single graph editor into a small suite of six desktop apps sharing that one graph.",
   description:
-    "MonOSS models everything as a mote: an object with free-form properties, linked to other motes through explicit, typed relationships rather than hidden references. Species, templates, and folders all emerge from that same primitive rather than being special-cased into the schema. The most involved piece is the simulation layer: a rule is just a mote carrying an equation, and the solver determines a mote's declared \"free\" properties from the properties around it in the graph — with full unit tracking and dimensional analysis, and provenance recorded for every computed value.",
+    "MonOSS models everything as a mote: an object with free-form properties, linked to other motes through explicit, typed relationships rather than hidden references. The graph itself lives in Monarch, but the same underlying data now also opens as a notes editor, a calendar, a task board, a bulk-edit table, and a simulation workbench — six independent windows reading and writing one shared garden live, rather than six apps with their own copies of the data. The most involved piece is the simulation layer: a rule is just a mote carrying an equation, and the solver determines a mote's declared \"free\" properties from the properties around it in the graph — with full unit tracking, provenance recorded for every computed value, and a pluggable registry of solver backends.",
   stats: [
-    { value: "~12,000", label: "lines of Python" },
-    { value: "100+", label: "commits in 3 weeks" },
-    { value: "38", label: "automated test suites" },
+    { value: "~50,000", label: "lines of code" },
+    { value: "141", label: "commits in 4 weeks" },
+    { value: "45", label: "automated test suites" },
+    { value: "6", label: "desktop apps, one shared graph" },
   ],
   highlights: [
-    "Designed the core graph data model — motes, typed relationships, species/templates, folders, and cross-graph \"portals\" — persisted to SQLite behind a layered repository/service architecture.",
-    "Built a rule-based simulation engine: equations attached to relationships solve for a mote's free properties via pluggable nonlinear solver backends, with units parsed from compound strings (e.g. J/(kg*K)) and provenance tracked for every derived value.",
-    "Exposed the graph through three surfaces from one core: a CLI, a desktop UI (pywebview + a custom JS graph canvas), and a Model Context Protocol (MCP) server so an LLM agent can read and edit gardens directly.",
-    "Added Google Calendar sync and a small plain-text notation (.modoc) for annotating motes outside the graph UI.",
+    "Designed the core graph data model — motes, typed relationships, and a query layer — persisted to SQLite behind a layered repository/service architecture shared by every app in the suite.",
+    "Grew a single graph editor into six independent desktop windows — Monarch, Mora, Monastery, Momentum, Monolith, and Motion — that all read and write the same garden live, each specialized for a different way of working with it (see below).",
+    "Built a rule-based simulation engine: equations attached to relationships solve for a mote's free properties through a pluggable solver registry, with units, provenance, and a scrubbable run timeline in Motion.",
+    "Exposed the whole graph through a CLI and a Model Context Protocol (MCP) server, so an LLM agent can read and edit gardens directly alongside the desktop apps.",
+  ],
+  apps: [
+    {
+      name: "Monarch",
+      role: "The graph",
+      description:
+        "The original window: an interactive node graph of motes and relationships, with species/folder legends and saved views.",
+    },
+    {
+      name: "Mora",
+      role: "The notes",
+      description:
+        "A plain-text note editor built around .modoc, a small notation for annotating motes inline, with a searchable note switcher.",
+    },
+    {
+      name: "Monastery",
+      role: "The calendar",
+      description:
+        "A calendar over every dated mote in the garden, with drag-and-drop event editing and recurring series.",
+    },
+    {
+      name: "Momentum",
+      role: "The tasks",
+      description:
+        "A task board, week planner, and timer that discovers status/priority/estimate properties per garden and schedules against Monastery's calendar.",
+    },
+    {
+      name: "Monolith",
+      role: "The table",
+      description:
+        "A spreadsheet-style view for comparing and bulk-editing many motes at once, with a per-row undo token instead of a confirmation dialog.",
+    },
+    {
+      name: "Motion",
+      role: "The simulator",
+      description:
+        "A dedicated workbench for scenarios, solvers, and rule authoring, with a scrubbable timeline over simulation runs.",
+    },
   ],
   stack: [
     "Python",
@@ -63,7 +102,7 @@ export const research = [
   {
     title: "Undergraduate Researcher — Quantum Materials Discovery",
     org: "Colorado School of Mines, Physics Dept.",
-    dates: "2025 – Present",
+    dates: "2025 – 2026",
     location: "Golden, CO",
     description:
       "Designed and executed XRD/SEM workflows to characterize Kagome metallic lattices, and partnered with a Bay Area startup to train ML models predicting superconducting material properties.",

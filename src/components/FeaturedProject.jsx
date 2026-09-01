@@ -2,12 +2,39 @@ import { useState } from "react";
 import { featuredProject } from "../data/content.js";
 import GraphMotif from "./GraphMotif.jsx";
 import Lightbox from "./Lightbox.jsx";
+import Carousel from "./Carousel.jsx";
 import graphOverview from "../assets/monoss/graph-overview.png";
 import graphDetail from "../assets/monoss/graph-detail.png";
+import moraNotes from "../assets/monoss/mora-notes.png";
+import monolithTable from "../assets/monoss/monolith-table.png";
+import motionSimulator from "../assets/monoss/motion-simulator.png";
 
 const screenshots = [
-  { src: graphOverview, alt: "MonOSS graph view showing motes and relationships across a garden" },
-  { src: graphDetail, alt: "MonOSS detail panel showing a mote's properties and relationships" },
+  {
+    src: graphOverview,
+    alt: "MonOSS graph view showing motes and relationships across a garden",
+    caption: "Monarch — whole-garden graph view",
+  },
+  {
+    src: graphDetail,
+    alt: "MonOSS detail panel showing a mote's properties and relationships",
+    caption: "Monarch — mote detail panel",
+  },
+  {
+    src: moraNotes,
+    alt: "Mora note editor showing a plain-text .modoc note with rendered math",
+    caption: "Mora — the note editor",
+  },
+  {
+    src: monolithTable,
+    alt: "Monolith table view showing motes grouped by species and a relationship matrix",
+    caption: "Monolith — the bulk-edit table, with its relationship matrix",
+  },
+  {
+    src: motionSimulator,
+    alt: "Motion simulation workbench showing a Rankine cycle rule graph and a run timeline",
+    caption: "Motion — simulating a Rankine cycle",
+  },
 ];
 
 export default function FeaturedProject() {
@@ -45,18 +72,19 @@ export default function FeaturedProject() {
               ))}
             </ul>
 
-            <div className="screenshot-row">
-              {screenshots.map((shot) => (
-                <button
-                  key={shot.src}
-                  className="screenshot-button"
-                  onClick={() => setLightbox(shot)}
-                  aria-label={`Enlarge: ${shot.alt}`}
-                >
-                  <img src={shot.src} alt={shot.alt} />
-                </button>
+            <div className="apps-grid">
+              {p.apps.map((app) => (
+                <div className="app-card" key={app.name}>
+                  <div className="app-card-head">
+                    <h4>{app.name}</h4>
+                    <span className="app-role">{app.role}</span>
+                  </div>
+                  <p>{app.description}</p>
+                </div>
               ))}
             </div>
+
+            <Carousel slides={screenshots} onEnlarge={setLightbox} />
 
             <div className="tag-row">
               {p.stack.map((s) => (
